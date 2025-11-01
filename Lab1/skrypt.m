@@ -1,0 +1,32 @@
+%wartosci nominalne
+TzewN = -20; %oC
+TwewN = 20; %oC
+TpN = 15; %oC
+PgN = 10000; %W
+Vw = 100 * 2.5; %m3
+Vp = 0.25 * Vw; %m3
+cp = 1000; %J/(kgK)
+ro = 1.2; %kg/m3
+
+%parametry statyczne - założenie b)
+FpN = 0.01; %m3/s
+K1 = 0.6 * PgN / (TwewN-TzewN); %W/K
+Kp = (PgN - K1*(TwewN - TzewN) - cp*ro*FpN*(TpN-TzewN)) / (TwewN - TpN); %W/K
+Kd = Kp * (TwewN - TpN) / (TpN - TzewN); %W/K
+
+fprintf('Parametry statyczne:\n');
+fprintf('K1 = %.2f W/K\n', K1);
+fprintf('Kp = %.2f W/K\n', Kp);
+fprintf('Kd = %.2f W/K\n\n', Kd);
+
+%parametry dynamiczne
+
+Cp = 0; %J/k
+Cw = cp * ro * Vw; %J/K
+
+%punkt pracy
+
+Twew0 = TzewN + PgN / (K1 + cp*ro*FpN + (Kp * Kd) / (Kp + Kd)); %oC
+Tp0   = (Kp * Twew0 + Kd * TzewN) / (Kp + Kd); %oC
+
+fprintf('Punkt pracy:\nTwew0 = %.4f oC\nTp0   = %.4f oC\n', Twew0, Tp0);
