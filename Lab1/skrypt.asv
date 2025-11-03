@@ -26,7 +26,18 @@ Cw = cp * ro * Vw; %J/K
 
 %punkt pracy
 
+Tzew0 = -20; %oC
+Pg0 = 10000; %W
+FpN = 0.01; %m3
+
 Twew0 = TzewN + PgN / (K1 + cp*ro*FpN + (Kp * Kd) / (Kp + Kd)); %oC
 Tp0   = (Kp * Twew0 + Kd * TzewN) / (Kp + Kd); %oC
 
 fprintf('Punkt pracy:\nTwew0 = %.4f oC\nTp0   = %.4f oC\n', Twew0, Tp0);
+
+%symulacja
+
+czas = 50000;
+czas_skok=5000;
+
+dTzew = 1;

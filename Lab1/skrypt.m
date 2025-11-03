@@ -21,12 +21,25 @@ fprintf('Kd = %.2f W/K\n\n', Kd);
 
 %parametry dynamiczne
 
-Cp = 0; %J/k
-Cw = cp * ro * Vw; %J/K
+Cvp = 0; %J/k
+Cvw = cp * ro * Vw; %J/K
 
 %punkt pracy
 
-Twew0 = TzewN + PgN / (K1 + cp*ro*FpN + (Kp * Kd) / (Kp + Kd)); %oC
-Tp0   = (Kp * Twew0 + Kd * TzewN) / (Kp + Kd); %oC
+Tzew0 = -20; %oC
+Pg0 = 10000; %W
+Fp0 = 0.01; %m3/s
+
+Twew0 = Tzew0 + Pg0 / (K1 + cp*ro*Fp0 + (Kp * Kd) / (Kp + Kd)); %oC
+Tp0   = (Kp * Twew0 + Kd * Tzew0) / (Kp + Kd); %oC
 
 fprintf('Punkt pracy:\nTwew0 = %.4f oC\nTp0   = %.4f oC\n', Twew0, Tp0);
+
+%symulacja
+
+czas = 50000;
+czas_skok=5000;
+
+dTzew = 1;
+dPg = 0;
+DFp = 0;
